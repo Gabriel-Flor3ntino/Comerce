@@ -6,7 +6,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>E-Commerce - Cadastrar</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -48,24 +48,24 @@
                     <h2 class="section-heading text-uppercase">Cadastre-se</h2>
                     <h3 class="section-subheading text-muted">Crie seu Cadastro Gratuitamente</h3>
                 </div>
-                <form>
-                    <div class="row justify-content-md-center mb-5 text-center">
-                        <div class="col-md-12 align-self-center text-center">
-                            <div class="form-group input-login mx-auto">
-                                <input class="form-control" id="email" type="text" placeholder="Nome *" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group input-login mx-auto">
-                                <input class="form-control" id="email" type="email" placeholder="Email *" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group input-login mx-auto">
-                                <input class="form-control" id="phone" type="password" placeholder="Senha *" required="required" data-validation-required-message="Insira sua senha." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#cadastrar">Cadastrar</a>
-                        </div> 
+                <form th:action="@{/cadastrar}" method="post" th:object="${usuario}">
+
+                    <div class="form-group input-login mx-auto">
+                        <input name="usuario.nome" class="form-control" type="text" placeholder="Nome *"
+                            th:field="*{nome}" required />
                     </div>
+
+                    <div class="form-group input-login mx-auto">
+                        <input name="usuario.email" class="form-control" type="email" placeholder="Email *"
+                            th:field="*{email}" required />
+                    </div>
+
+                    <div class="form-group input-login mx-auto">
+                        <input name="usuario.senha" class="form-control" type="password" placeholder="Senha *"
+                            th:field="*{senha}" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-xl text-uppercase">Cadastrar</button>
                     
                 </form>
             </div>
