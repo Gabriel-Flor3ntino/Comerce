@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +7,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>E-Commerce - Produtos</title>
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
   <!-- Google fonts-->
@@ -16,14 +16,14 @@
     type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="css/styles.css" rel="stylesheet" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 
 <body id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/logos/logo.png" alt="Logo" /></a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img th:src="@{/assets/img/logos/logo.png}" alt="Logo" /></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -32,15 +32,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="categorias.html">Categorias</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{/categorias}">Categorias</a></li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="produtos.html#portfolio">Produtos</a>
+            <a class="nav-link js-scroll-trigger" th:href="@{/produtos}">Produtos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="login.html">Login</a>
+            <a class="nav-link js-scroll-trigger" th:href="@{/login}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="cadastrar.html#cadastrar">Cadastrar-se</a>
+            <a class="nav-link js-scroll-trigger" th:href="@{/cadastrar}">Cadastrar-se</a>
           </li>
         </ul>
       </div>
@@ -96,7 +96,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/01-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/01-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 99,00</div>
@@ -112,14 +112,14 @@
           <div class="modal-dialog mx-auto">
             <div class="modal-content">
               <div class="close-modal" data-dismiss="modal">
-                <img src="assets/img/close-icon.svg" alt="Close modal" />
+                <img th:src="@{/assets/img/close-icon.svg}" alt="Close modal" />
               </div>
               <div class="container">
                 <div class="row justify-content-center">
                   <div class="col-lg-8">
                     <div class="modal-body">
                       <!-- Project Details Go Here-->
-                      <img class="img-fluid d-block mx-auto img-modal" src="assets/img/portfolio/01-full.jpg" alt="" />
+                      <img class="img-fluid d-block mx-auto img-modal" th:src="@{/assets/img/portfolio/01-full.jpg}" alt="" />
                       <h2 class="text-uppercase">R$ 99,00</h2>
                       <p class="item-intro text-muted">
                         Camisa Polo Basica
@@ -155,7 +155,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/02-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/02-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 30,00</div>
@@ -173,7 +173,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/03-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/03-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 95,00</div>
@@ -191,7 +191,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/04-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/04-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 4.199,00</div>
@@ -209,7 +209,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/05-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/05-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 2.349,00</div>
@@ -227,7 +227,7 @@
                   <i class="fas fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="assets/img/portfolio/06-thumbnail.jpg" alt="" />
+              <img class="img-fluid" th:src="@{/assets/img/portfolio/06-thumbnail.jpg}" alt="" />
             </a>
             <div class="portfolio-caption">
               <div class="portfolio-caption-heading">R$ 2.549,00</div>
@@ -266,10 +266,10 @@
   <!-- Third party plugin JS-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
   <!-- Contact form JS-->
-  <script src="assets/mail/jqBootstrapValidation.js"></script>
-  <script src="assets/mail/contact_me.js"></script>
+  <script th:src="@{/assets/mail/jqBootstrapValidation.js}"></script>
+  <script th:src="@{/assets/mail/contact_me.js}"></script>
   <!-- Core theme JS-->
-  <script src="js/scripts.js"></script>
+  <script th:src="@{/js/scripts.js}"></script>
   <script></script>
 </body>
 

@@ -12,12 +12,12 @@ import br.com.comerce.model.Usuario;
 public class CadastrarController {
   
   @GetMapping
-  public String login() {
-    return "cadastrar.html";
+  public String cadastrar() {
+    return "cadastrar"; // sem .html
   }
 
   @PostMapping
-    public String salvar(Usuario usuario) {
-        return "redirect:/login";
-    }
+  public String salvar(Usuario usuario) {
+    return "redirect:/login";
+  }
 }
