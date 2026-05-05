@@ -1,50 +1,39 @@
 package br.com.comerce.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-  
-  //#region Atributos
-  private String nome;
-  
-  private Integer id;
 
-  private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private String senha;
-  //#endregion
-  
-  //#region Getters e Setters
-  public String getNome() {
-    return nome;
-  }
+    @NotBlank(message = "O nome é obrigatório")
+    @Column(nullable = false)
+    private String nome;
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
+    @Email(message = "Email inválido")
+    @NotBlank(message = "O email é obrigatório")
+    @Column(nullable = false, unique = true)
+    private String email;
 
-  public Integer getId() {
-    return id;
-  }
+    @NotBlank(message = "A senha é obrigatória")
+    @Column(nullable = false)
+    private String senha;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-  public String getSenha() {
-    return senha;
-  }
-
-  public void setSenha(String senha) {
-    this.senha = senha;
-  }
-  //#endregion
-  
-
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 }

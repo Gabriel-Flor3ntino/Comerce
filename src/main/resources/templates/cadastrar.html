@@ -4,14 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>E-Commerce - Cadastrar</title>
-
     <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}" />
-
-    <!-- CSS -->
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
-
-    <!-- Fonts -->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -22,33 +18,28 @@
         <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/assets/img/logos/logo.png}" alt="Logo" />
         </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            Menu
+        <button class="navbar-toggler navbar-toggler-right" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <i class="fas fa-bars ml-1"></i>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto text-uppercase">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categorias}">Categorias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/produtos}">Produtos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/cadastrar}">Cadastrar-se</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/categorias}">Categorias</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cadastrar}">Cadastrar-se</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- HEADER -->
-<header class="masthead" id="cadastrar-header">
-    <div class="container"></div>
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">Junte-se a nós!</div>
+        <div class="masthead-heading text-uppercase">Cadastro</div>
+    </div>
 </header>
 
 <!-- FORMULÁRIO -->
@@ -57,10 +48,22 @@
 
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Cadastre-se</h2>
-            <h3 class="section-subheading text-muted">Crie seu cadastro gratuitamente</h3>
+            <h3 class="section-subheading text-muted">Crie sua conta gratuitamente</h3>
         </div>
 
+        <!--
+            CORRIGIDO: th:object="${usuario}" depende do controller injetar o objeto.
+            CadastrarController agora faz model.addAttribute("usuario", new Usuario()) no GET.
+            th:field realiza bind automático de id, name e value.
+        -->
         <form th:action="@{/cadastrar}" th:object="${usuario}" method="post">
+
+            <!-- Exibe erros de validação globais -->
+            <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
+                <ul>
+                    <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+                </ul>
+            </div>
 
             <div class="form-group">
                 <input type="text"
@@ -68,6 +71,9 @@
                        placeholder="Nome *"
                        th:field="*{nome}"
                        required />
+                <p class="help-block text-danger"
+                   th:if="${#fields.hasErrors('nome')}"
+                   th:errors="*{nome}"></p>
             </div>
 
             <div class="form-group">
@@ -76,6 +82,9 @@
                        placeholder="Email *"
                        th:field="*{email}"
                        required />
+                <p class="help-block text-danger"
+                   th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}"></p>
             </div>
 
             <div class="form-group">
@@ -84,11 +93,19 @@
                        placeholder="Senha *"
                        th:field="*{senha}"
                        required />
+                <p class="help-block text-danger"
+                   th:if="${#fields.hasErrors('senha')}"
+                   th:errors="*{senha}"></p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-xl text-uppercase">
-                Cadastrar
-            </button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-xl text-uppercase">
+                    Cadastrar
+                </button>
+                <a th:href="@{/login}" class="btn btn-secondary btn-xl text-uppercase ml-2">
+                    Já tenho conta
+                </a>
+            </div>
 
         </form>
     </div>
@@ -97,12 +114,12 @@
 <!-- FOOTER -->
 <footer class="footer py-4">
     <div class="container text-center">
-        <span>© 2021 DankiCommerce</span>
+        <span>&copy; 2021 DankiCommerce</span>
     </div>
 </footer>
 
-<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/scripts.js}"></script>
-
 </body>
 </html>

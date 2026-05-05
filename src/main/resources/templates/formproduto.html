@@ -3,108 +3,160 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>E-Commerce - Form Produto</title>
-
+    <title>E-Commerce - Produto</title>
+    <link rel="icon" th:href="@{/assets/img/favicon.ico}" />
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    <link th:href="@{/css/fileinput.min.css}" rel="stylesheet" />
 </head>
 
-<body>
+<body id="page-top">
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/assets/img/logos/logo.png}" />
+            <img th:src="@{/assets/img/logos/logo.png}" alt="Logo" />
         </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto text-uppercase">
+                <li class="nav-item"><a class="nav-link" th:href="@{/categorias}">Categorias</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
-<header class="masthead"></header>
+<!-- HEADER -->
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">Gerenciamento</div>
+        <div class="masthead-heading text-uppercase"
+             th:text="${produto.id == null} ? 'Novo Produto' : 'Editar Produto'">
+        </div>
+    </div>
+</header>
 
 <!-- FORM -->
 <section class="page-section">
     <div class="container">
 
-        <div class="text-center">
+        <div class="text-center mb-4">
             <h2 class="section-heading text-uppercase"
                 th:text="${produto.id == null} ? 'Novo Produto' : 'Editar Produto'">
             </h2>
         </div>
 
+        <!--
+            CORRIGIDO: th:object="${produto}" depende do controller injetar o objeto no model.
+            ProdutosController.novo() faz model.addAttribute("produto", new Produto())
+            ProdutosController.editar() faz model.addAttribute("produto", produtoExistente)
+
+            enctype="multipart/form-data" necessário para o upload de imagem funcionar.
+            th:action aponta para /produtos/salvar (POST).
+
+            CORRIGIDO: o select de categoria usava th:field="*{categoria}" tentando fazer bind
+            direto de um objeto Categoria ao select — isso não funciona diretamente.
+            Substituído por name="categoriaId" com th:selected para comparar IDs.
+        -->
         <form th:action="@{/produtos/salvar}"
               th:object="${produto}"
               method="post"
               enctype="multipart/form-data">
 
-            <!-- ID -->
+            <!-- ID oculto (para edição) -->
             <input type="hidden" th:field="*{id}" />
 
             <!-- IMAGEM -->
             <div class="form-group">
-                <input type="file" name="imagem" class="form-control"/>
+                <label>Imagem do Produto</label>
+                <!-- Input de arquivo com name="imagem" — capturado como MultipartFile no controller -->
+                <input type="file" name="imagem" class="form-control" accept="image/*" />
+                <!-- Preview da imagem atual se estiver editando -->
+                <div th:if="${produto.imagemUrl != null}" class="mt-2">
+                    <small class="text-muted">Imagem atual:</small><br/>
+                    <img th:src="${produto.imagemUrl}" alt="Imagem atual"
+                         style="max-height:120px; max-width:200px; object-fit:cover;" class="mt-1 img-thumbnail" />
+                </div>
             </div>
 
             <!-- NOME -->
             <div class="form-group">
+                <label for="nome">Nome do Produto *</label>
                 <input type="text"
+                       id="nome"
                        class="form-control"
                        placeholder="Nome *"
                        th:field="*{nome}"
                        required />
+                <p class="help-block text-danger"
+                   th:if="${#fields.hasErrors('nome')}"
+                   th:errors="*{nome}"></p>
             </div>
 
             <!-- VALOR -->
             <div class="form-group">
+                <label for="valor">Valor (R$) *</label>
                 <input type="number"
+                       id="valor"
                        step="0.01"
+                       min="0"
                        class="form-control"
                        placeholder="Valor (R$)"
                        th:field="*{valor}"
                        required />
+                <p class="help-block text-danger"
+                   th:if="${#fields.hasErrors('valor')}"
+                   th:errors="*{valor}"></p>
             </div>
 
             <!-- DESCRIÇÃO -->
             <div class="form-group">
-                <textarea class="form-control"
-                          placeholder="Descrição"
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Descrição do produto"
                           th:field="*{descricao}">
                 </textarea>
             </div>
 
             <!-- CATEGORIA -->
+            <!--
+                CORRIGIDO: o select original usava th:field="*{categoria}" tentando vincular
+                um objeto Categoria inteiro. No Spring MVC isso exige um Converter registrado.
+                A solução mais simples e funcional é usar name="categoriaId" e receber
+                o ID como @RequestParam Long no controller, que então busca a Categoria.
+            -->
             <div class="form-group">
-                <select class="form-control"
-                        th:field="*{categoria}"
-                        required>
-
-                    <option value="">Selecione</option>
-
+                <label for="categoriaId">Categoria</label>
+                <select id="categoriaId" name="categoriaId" class="form-control">
+                    <option value="">Selecione uma categoria</option>
                     <option th:each="cat : ${categorias}"
                             th:value="${cat.id}"
-                            th:text="${cat.nome}">
+                            th:text="${cat.nome}"
+                            th:selected="${produto.categoria != null and produto.categoria.id == cat.id}">
                     </option>
-
                 </select>
             </div>
 
-            <!-- DATA -->
+            <!-- DATA DE VALIDADE -->
             <div class="form-group">
+                <label for="dataValidade">Data de Validade</label>
                 <input type="date"
+                       id="dataValidade"
                        class="form-control"
                        th:field="*{dataValidade}" />
             </div>
 
             <!-- BOTÕES -->
             <div class="text-center">
-                <button type="submit"
-                        class="btn btn-primary btn-xl">
-                    Salvar
+                <button type="submit" class="btn btn-primary btn-xl text-uppercase mr-2">
+                    <i class="fas fa-save mr-1"></i> Salvar
                 </button>
-
-                <a th:href="@{/produtos}"
-                   class="btn btn-secondary btn-xl">
-                    Cancelar
+                <a th:href="@{/produtos}" class="btn btn-secondary btn-xl text-uppercase">
+                    <i class="fas fa-times mr-1"></i> Cancelar
                 </a>
             </div>
 
@@ -115,12 +167,12 @@
 
 <footer class="footer py-4 text-center">
     <div class="container">
-        © 2021 DankiCommerce
+        &copy; 2021 DankiCommerce
     </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/js/scripts.js}"></script>
-<script th:src="@{/js/jquery.mask.min.js}"></script>
-
 </body>
 </html>

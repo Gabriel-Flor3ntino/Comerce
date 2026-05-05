@@ -1,281 +1,304 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title th:text="${pageTitle} ?: 'Agency - Start Bootstrap Theme'">Agency - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}" />
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <link th:href="@{/css/styles.css}" rel="stylesheet" />
-    </head>
-    <body id="page-top">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>DankiCommerce</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}" />
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body id="page-top">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                    <img th:src="@{/assets/img/navbar-logo.svg}" alt="Logo" />
-                </a>
-                <button class="navbar-toggler navbar-toggler-right" type="button"
-                        data-toggle="collapse" data-target="#navbarResponsive"
-                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu <i class="fas fa-bars ml-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" th:text="#{nav.services}">Services</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio" th:text="#{nav.portfolio}">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about" th:text="#{nav.about}">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team" th:text="#{nav.team}">Team</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" th:text="#{nav.contact}">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Masthead -->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading" th:text="${masthead?.subheading} ?: 'Welcome To Our Studio!'">Welcome To Our Studio!</div>
-                <div class="masthead-heading text-uppercase" th:text="${masthead?.heading} ?: 'It\'s Nice To Meet You'">It's Nice To Meet You</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services" th:text="${masthead?.cta} ?: 'Tell Me More'">Tell Me More</a>
-            </div>
-        </header>
-
-        <!-- Services -->
-        <section class="page-section" id="services">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" th:text="#{services.title}">Services</h2>
-                    <h3 class="section-subheading text-muted" th:text="#{services.subtitle}">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4" th:each="service : ${services}">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i th:classappend="${service.icon} + ' fa-stack-1x fa-inverse'" class="fas"></i>
-                        </span>
-                        <h4 class="my-3" th:text="${service.title}">Service Title</h4>
-                        <p class="text-muted" th:text="${service.description}">Service description.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio Grid -->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" th:text="#{portfolio.title}">Portfolio</h2>
-                    <h3 class="section-subheading text-muted" th:text="#{portfolio.subtitle}">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4" th:each="item, iterStat : ${portfolioItems}">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-toggle="modal" th:href="'#portfolioModal' + ${iterStat.index + 1}">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" th:src="@{${item.thumbnail}}" th:alt="${item.title}" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading" th:text="${item.title}">Project Title</div>
-                                <div class="portfolio-caption-subheading text-muted" th:text="${item.category}">Category</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section class="page-section" id="about">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" th:text="#{about.title}">About</h2>
-                    <h3 class="section-subheading text-muted" th:text="#{about.subtitle}">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <ul class="timeline">
-                    <li th:each="milestone, iterStat : ${milestones}" th:classappend="${iterStat.even} ? '' : 'timeline-inverted'">
-                        <div class="timeline-image">
-                            <img class="rounded-circle img-fluid"
-                                 th:src="@{${milestone.image}}"
-                                 th:alt="${milestone.heading}" />
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 th:text="${milestone.period}">Period</h4>
-                                <h4 class="subheading" th:text="${milestone.heading}">Heading</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted" th:text="${milestone.description}">Description.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4 th:text="#{about.cta}">Be Part<br/>Of Our<br/>Story!</h4>
-                        </div>
-                    </li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <img th:src="@{/assets/img/logos/logo.png}" alt="DankiCommerce" />
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button"
+                    data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu <i class="fas fa-bars ml-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Serviços</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/categorias}">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/produtos}">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/cadastrar}">Cadastrar-se</a></li>
                 </ul>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <!-- Team -->
-        <section class="page-section bg-light" id="team">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" th:text="#{team.title}">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted" th:text="#{team.subtitle}">Lorem ipsum dolor sit amet consectetur.</h3>
+    <!-- Masthead -->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Bem-vindo à</div>
+            <div class="masthead-heading text-uppercase">DankiCommerce</div>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Saiba Mais</a>
+        </div>
+    </header>
+
+    <!-- Serviços / Benefícios -->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Nossos Benefícios</h2>
+                <h3 class="section-subheading text-muted">Aqui na DankiCommerce você encontra os melhores preços!</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Rápido</h4>
+                    <p class="text-muted">Encontre e realize sua compra de maneira prática e rápida!</p>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4" th:each="member : ${teamMembers}">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle"
-                                 th:src="@{${member.photo}}"
-                                 th:alt="${member.name}" />
-                            <h4 th:text="${member.name}">Name</h4>
-                            <p class="text-muted" th:text="${member.role}">Role</p>
-                            <a class="btn btn-dark btn-social mx-2" th:href="${member.twitter}"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" th:href="${member.facebook}"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" th:href="${member.linkedin}"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Multiplataforma</h4>
+                    <p class="text-muted">Consulte sua compra na web por qualquer dispositivo. Celular, Tablet ou Computador!</p>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <p class="large text-muted" th:text="${teamDescription}">Team description.</p>
-                    </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Compra Segura</h4>
+                    <p class="text-muted">Compra segura e em parceiros confiáveis. Caso não receba o produto, o reembolso é imediato!</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Clients -->
-        <div class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6 my-3" th:each="client : ${clients}">
-                        <a th:href="${client.url}">
-                            <img class="img-fluid d-block mx-auto"
-                                 th:src="@{${client.logo}}"
-                                 th:alt="${client.name}" />
+    <!-- Produtos Destaque -->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Produtos em Destaque</h2>
+                <h3 class="section-subheading text-muted">Confira nossas principais ofertas.</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" th:src="@{/assets/img/portfolio/01-thumbnail.jpg}" alt="Camisa Polo" />
                         </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">R$ 99,00</div>
+                            <div class="portfolio-caption-subheading text-muted">Camisa Polo Básica</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" th:src="@{/assets/img/portfolio/02-thumbnail.jpg}" alt="Bandeira Keep" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">R$ 30,00</div>
+                            <div class="portfolio-caption-subheading text-muted">Bandeira Keep</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" th:src="@{/assets/img/portfolio/03-thumbnail.jpg}" alt="Molde para Sapato" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">R$ 95,00</div>
+                            <div class="portfolio-caption-subheading text-muted">Molde para Sapato</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a th:href="@{/produtos}" class="btn btn-primary btn-xl text-uppercase">Ver Todos os Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Sobre Nós</h2>
+                <h3 class="section-subheading text-muted">Uma empresa dedicada a oferecer a melhor experiência de compra online.</h3>
+            </div>
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" th:src="@{/assets/img/about/1.jpg}" alt="2018" />
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>2018</h4>
+                            <h4 class="subheading">Fundação</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">A DankiCommerce foi fundada com a missão de democratizar o acesso a produtos de qualidade.</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" th:src="@{/assets/img/about/2.jpg}" alt="2019" />
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>2019</h4>
+                            <h4 class="subheading">Expansão</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">Expandimos nosso catálogo para mais de 500 produtos em diversas categorias.</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-image">
+                        <img class="rounded-circle img-fluid" th:src="@{/assets/img/about/3.jpg}" alt="2020" />
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>2020</h4>
+                            <h4 class="subheading">Nova Plataforma</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">Lançamos nossa nova plataforma tecnológica com foco em performance e usabilidade.</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <h4>Faça Parte<br/>da Nossa<br/>História!</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Clientes -->
+    <div class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3 col-sm-6 my-3">
+                    <img class="img-fluid d-block mx-auto" th:src="@{/assets/img/logos/envato.jpg}" alt="Envato" />
+                </div>
+                <div class="col-md-3 col-sm-6 my-3">
+                    <img class="img-fluid d-block mx-auto" th:src="@{/assets/img/logos/designmodo.jpg}" alt="Designmodo" />
+                </div>
+                <div class="col-md-3 col-sm-6 my-3">
+                    <img class="img-fluid d-block mx-auto" th:src="@{/assets/img/logos/themeforest.jpg}" alt="ThemeForest" />
+                </div>
+                <div class="col-md-3 col-sm-6 my-3">
+                    <img class="img-fluid d-block mx-auto" th:src="@{/assets/img/logos/creative-market.jpg}" alt="Creative Market" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contato -->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Fale Conosco</h2>
+                <h3 class="section-subheading text-muted">Estamos prontos para te atender!</h3>
+            </div>
+            <!-- Formulário de contato simples (sem backend de email neste momento) -->
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Nome *" />
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" placeholder="Email *" />
+                    </div>
+                    <div class="form-group mb-md-0">
+                        <input class="form-control" type="tel" placeholder="Telefone *" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-textarea mb-md-0">
+                        <textarea class="form-control" placeholder="Mensagem *"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary btn-xl text-uppercase" type="button">Enviar Mensagem</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-left">Copyright &copy; DankiCommerce 2021</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-right">
+                    <a class="mr-3" href="#!">Privacy Policy</a>
+                    <a href="#!">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog mx-auto">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <img th:src="@{/assets/img/close-icon.svg}" alt="Fechar" />
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">R$ 99,00</h2>
+                                <p class="item-intro text-muted">Camisa Polo Básica</p>
+                                <img class="img-fluid d-block mx-auto" th:src="@{/assets/img/portfolio/01-full.jpg}" alt="" />
+                                <p>A camisa polo é versátil e pode ser usada em ambientes formais e informais. Uma peça essencial no seu guarda-roupa.</p>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    <i class="fas fa-times mr-1"></i> Fechar
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Contact -->
-        <section class="page-section" id="contact">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" th:text="#{contact.title}">Contact Us</h2>
-                    <h3 class="section-subheading text-muted" th:text="#{contact.subtitle}">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <form id="contactForm" th:action="@{/contact}" th:object="${contactForm}" method="post" novalidate>
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" th:field="*{name}" type="text"
-                                       th:placeholder="#{contact.name}" required />
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('name')}"
-                                   th:errors="*{name}"></p>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" th:field="*{email}" type="email"
-                                       th:placeholder="#{contact.email}" required />
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('email')}"
-                                   th:errors="*{email}"></p>
-                            </div>
-                            <div class="form-group mb-md-0">
-                                <input class="form-control" th:field="*{phone}" type="tel"
-                                       th:placeholder="#{contact.phone}" required />
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('phone')}"
-                                   th:errors="*{phone}"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" th:field="*{message}"
-                                          th:placeholder="#{contact.message}" required></textarea>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('message')}"
-                                   th:errors="*{message}"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <div id="success" th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" type="submit" th:text="#{contact.send}">Send Message</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left" th:text="${footerCopyright} ?: 'Copyright © Your Website 2020'">Copyright © Your Website 2020</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" th:href="${socialLinks?.twitter} ?: '#'"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" th:href="${socialLinks?.facebook} ?: '#'"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" th:href="${socialLinks?.linkedin} ?: '#'"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-right">
-                        <a class="mr-3" th:href="@{/privacy}" th:text="#{footer.privacy}">Privacy Policy</a>
-                        <a th:href="@{/terms}" th:text="#{footer.terms}">Terms of Use</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <!-- Portfolio Modals -->
-        <div th:each="item, iterStat : ${portfolioItems}"
-             class="portfolio-modal modal fade"
-             th:id="'portfolioModal' + ${iterStat.index + 1}"
-             tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal">
-                        <img th:src="@{/assets/img/close-icon.svg}" alt="Close modal" />
-                    </div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <h2 class="text-uppercase" th:text="${item.title}">Project Name</h2>
-                                    <p class="item-intro text-muted" th:text="${item.intro}">Intro text.</p>
-                                    <img class="img-fluid d-block mx-auto"
-                                         th:src="@{${item.fullImage}}"
-                                         th:alt="${item.title}" />
-                                    <p th:text="${item.description}">Project description.</p>
-                                    <ul class="list-inline">
-                                        <li th:text="${item.date}">Date</li>
-                                        <li th:text="${item.client}">Client</li>
-                                        <li th:text="${item.category}">Category</li>
-                                    </ul>
-                                    <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                        <i class="fas fa-times mr-1"></i>
-                                        <span th:text="#{portfolio.close}">Close Project</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script th:src="@{/js/scripts.js}"></script>
-    </body>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+</body>
 </html>
